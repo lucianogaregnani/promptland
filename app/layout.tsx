@@ -16,7 +16,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`text-slate-700 ${inter.className}`}>
+        <div className="gradient" />
+        <nav className="fixed z-20 top-0 w-full flex justify-between p-6 items-center">
+          <p className="text-2xl font-semibold">
+            prompt<span className="text-indigo-500">land</span>
+          </p>
+          <button className="normalBtn">Sign In</button>
+        </nav>
+        <main className="relative z-10">{children}</main>
+      </body>
     </html>
   );
 }

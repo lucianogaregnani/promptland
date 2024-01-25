@@ -2,32 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.gradient {
+  height: fit-content;
+  z-index: 3;
+  width: 100%;
+  background-image: radial-gradient(
+      at 27% 37%,
+      hsla(250, 98%, 61%, 1) 0px,
+      transparent 50%
+    ),
+    radial-gradient(
+      at 90% 100%,
+      hsla(250, 98%, 61%, 1) 0px,
+      transparent 50%
+    );
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(100px) saturate(150%);
+  opacity: 0.10;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .normalBtn {
+    @apply bg-indigo-500 text-white font-semibold py-2 px-5 rounded-lg hover:bg-indigo-400 transition-all
+  }
+
+  .textTitle {
+    @apply text-6xl font-bold 
+  }
+
+  .text-indigo-gradient {
+    @apply bg-gradient-to-r from-indigo-500 to-indigo-600 bg-clip-text text-transparent
   }
 }
