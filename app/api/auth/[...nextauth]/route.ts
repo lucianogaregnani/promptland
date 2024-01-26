@@ -1,5 +1,8 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
+import NextAuth, { Session } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import { SignInParams } from "@/types/nextAuth.types";
+import connectToDB from "@/utils/database";
+import User from "@/models/User.model";
 
 export const authOptions = {
   providers: [
@@ -8,7 +11,33 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_SECRET || "",
     }),
   ],
-}
+  callbacks: {
+    async session({ session }: { session: Session }) {
+      return session;
+    },
+    async signIn(params: SignInParams) {
+      try {
+        await connectToDB();
 
-const handler = NextAuth(authOptions)
-export { handler as GET, handler as POST }
+        const user = await User.findOne({ email: params.profile?.email });
+        console.log(params.user)
+        if (!user) {
+          const newUser = await User.create({
+            email: params.user?.email,
+            username: params.user?.name?.toLocaleLowerCase().replace(" ", ""),
+            image: params.user?.image,
+          });
+          console.log(newUser)
+        }
+
+        return true;
+      } catch (error: any) {
+        console.log({error: error.message});
+        return false;
+      }
+    },
+  },
+};
+
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };

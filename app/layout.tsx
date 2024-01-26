@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import GoogleProvider from "@/components/GoogleProvider";
+import Nav from "@/components/Nav/Nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,13 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`text-slate-700 ${inter.className}`}>
         <div className="gradient" />
-        <nav className="fixed z-20 top-0 w-full flex justify-between p-6 items-center">
-          <p className="text-2xl font-semibold">
-            prompt<span className="text-indigo-500">land</span>
-          </p>
-          <button className="normalBtn">Sign In</button>
-        </nav>
-        <main className="relative z-10">{children}</main>
+        <GoogleProvider>
+          <Nav />
+          <main className="relative z-10">{children}</main>
+        </GoogleProvider>
       </body>
     </html>
   );
