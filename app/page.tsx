@@ -6,7 +6,7 @@ export default function Home() {
         <span className="text-indigo-500 font-medium">prompts!</span>
       </div>
       <h1 className="textTitle text-indigo-gradient text-center">Discover & Share AI Prompts</h1>
-      <p className="text-center text-lg">
+      <p className="text-center text-lg text-slate-600">
         Promptopia is an open-source AI prompting tool for modern world to
         discover, create and share creative prompts
       </p>
