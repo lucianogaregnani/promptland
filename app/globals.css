@@ -26,19 +26,23 @@
 
 @layer utilities {
   .btn {
-    @apply text-white font-semibold py-3 px-5 rounded-full transition-all
+    @apply font-semibold py-1 px-3 sm:py-3 sm:px-5 rounded-full transition-all
   }
 
   .normalBtn {
-    @apply btn bg-indigo-500 hover:bg-indigo-400 
+    @apply btn bg-indigo-500 hover:bg-indigo-400 text-white 
   }
 
   .redBtn {
-    @apply btn bg-red-500 hover:bg-red-400
+    @apply btn bg-red-500 hover:bg-red-400 text-white 
+  }
+
+  .transparent-normal-btn {
+    @apply btn border-2 border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white
   }
 
   .textTitle {
-    @apply text-6xl font-bold 
+    @apply text-5xl font-bold sm:text-6xl 
   }
 
   .text-indigo-gradient {
