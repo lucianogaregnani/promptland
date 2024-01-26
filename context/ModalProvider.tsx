@@ -1,6 +1,12 @@
+"use client"
+
 import { createContext, useState } from "react";
 
-const ModalContext = createContext({})
+export const ModalContext = createContext({
+    isOpen: false,
+    closeModal: () => {},
+    openModal: () => {}
+})
 
 function ModalProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -13,7 +19,15 @@ function ModalProvider({ children }: { children: React.ReactNode }) {
     setIsOpen(true)
   }
 
-  return <></>;
+  return (  
+    <ModalContext.Provider value={{
+        isOpen,
+        closeModal,
+        openModal
+    }}>
+        {children}
+    </ModalContext.Provider>
+  );
 }
 
 export default ModalProvider;

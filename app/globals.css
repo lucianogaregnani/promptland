@@ -3,8 +3,7 @@
 @tailwind utilities;
 
 .gradient {
-  height: fit-content;
-  z-index: 3;
+  z-index: 1;
   width: 100%;
   background-image: radial-gradient(
       at 27% 37%,
@@ -22,6 +21,17 @@
   height: 100%;
   filter: blur(100px) saturate(150%);
   opacity: 0.10;
+}
+
+form label {
+  display: flex;
+  flex-direction: column;
+}
+
+form label span {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color:rgb(80, 80, 80)
 }
 
 @layer utilities {
@@ -47,5 +57,9 @@
 
   .text-indigo-gradient {
     @apply bg-gradient-to-r from-indigo-500 to-indigo-700 bg-clip-text text-transparent
+  }
+
+  .input-type-text {
+    @apply  bg-slate-100 p-2 px-4 rounded-2xl max-w-xl border-2 border-slate-200 focus:border-indigo-400 focus:outline-none focus:ring-0
   }
 }

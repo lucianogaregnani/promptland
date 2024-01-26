@@ -4,11 +4,15 @@ import { IoIosAdd } from "react-icons/io";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useContext } from "react";
+import { ModalContext } from "@/context/ModalProvider";
 
 function SignedInSection({ imageUrl }: { imageUrl: string }) {
+  const { openModal } = useContext(ModalContext)
+
   return (
     <section className="flex gap-2">
-      <button className="fixed bottom-5 right-6 sm:transparent-normal-btn sm:static">
+      <button className="fixed bottom-5 right-6 sm:transparent-normal-btn sm:static" onClick={openModal}>
         <span className="hidden sm:block">Create Prompt</span>
         <span className="block sm:hidden text-5xl text-white bg-indigo-500 rounded-full">
           <IoIosAdd />

@@ -1,3 +1,5 @@
+import PromptModal from "@/components/Prompt/PromptModal";
+
 export default function Home() {
   return (
     <section className="max-w-xl mx-auto h-screen pt-14 flex justify-center items-center flex-col gap-3">
@@ -10,7 +12,7 @@ export default function Home() {
         Promptopia is an open-source AI prompting tool for modern world to
         discover, create and share creative prompts
       </p>
-      <input type="text" placeholder="Search prompt..." className="w-[90%] sm:w-full bg-slate-100 p-2 px-4 rounded-full max-w-xl border-2 border-slate-200 focus:border-indigo-400 focus:outline-none focus:ring-0"/>
+      <input type="text" placeholder="Search prompt..." className="w-[90%] sm:w-full input-type-text"/>
     </section>
   );
 }
