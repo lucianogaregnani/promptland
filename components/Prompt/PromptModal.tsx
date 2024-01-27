@@ -1,12 +1,13 @@
 "use client";
 
 import { ModalContext } from "@/context/ModalProvider";
+import createPrompt from "@/services/createPrompt.service";
 import CreatePromptSchema, {
   CreatePromptSchemaType,
 } from "@/validations/create-prompt.validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
 
@@ -22,24 +23,23 @@ function PromptModal({ type }: { type: string }) {
   });
 
   const onSubmit: SubmitHandler<CreatePromptSchemaType> = (data) => {
-    fetch("/api/prompt/new", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: data.title,
-        prompt: data.prompt,
-        tags: data.tags,
-        creator: session?.user?.id,
-      })
+    const { title, prompt, tags } = data;
+
+    createPrompt({
+      title,
+      prompt,
+      tags,
+      userId: session?.user?.id,
     }).then((res) => res.ok && closeModal());
   };
 
   return (
     isOpen && (
       <section className="z-30 fixed top-0 h-screen w-screen flex flex-col justify-center items-center">
-        <div onClick={closeModal} className="z-30 absolute h-screen w-screen bg-black/40" />
+        <div
+          onClick={closeModal}
+          className="z-30 absolute h-screen w-screen bg-black/40"
+        />
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-4 py-5 px-9 sm:px-16 bg-slate-100 transition-all rounded-2xl items-center justify-center relative z-40"

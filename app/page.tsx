@@ -1,4 +1,6 @@
 import Notice from "@/components/Notice";
+import ListOfPrompts from "@/components/Prompt/ListOfPrompts";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -16,6 +18,9 @@ export default function Home() {
         placeholder="Search prompt..."
         className="w-[90%] sm:w-full input-type-text"
       />
+      <Suspense fallback={<p>Loading...</p>}>
+        <ListOfPrompts />
+      </Suspense>
     </section>
   );
 }
