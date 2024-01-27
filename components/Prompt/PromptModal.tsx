@@ -38,8 +38,8 @@ function PromptModal({ type }: { type: string }) {
 
   return (
     isOpen && (
-      <section className="z-30 fixed top-0 h-screen w-screen bg-black/40 flex flex-col justify-center items-center p-6">
-        <div onClick={closeModal} className="z-30 absolute h-screen w-screen" />
+      <section className="z-30 fixed top-0 h-screen w-screen flex flex-col justify-center items-center">
+        <div onClick={closeModal} className="z-30 absolute h-screen w-screen bg-black/40" />
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-4 py-5 px-9 sm:px-16 bg-slate-100 transition-all rounded-2xl items-center justify-center relative z-40"

@@ -5,8 +5,6 @@ export const POST = async (request: Request) => {
     const body = await request.json()
     const { title, prompt, tags, creator } = body
 
-    console.log(title, prompt, tags, creator)
-
     try {
         const newPrompt = await Prompt.create({
             title,
