@@ -6,7 +6,7 @@ interface CreatePromptParams {
 }
 
 function createPrompt({ title, prompt, tags, userId }:CreatePromptParams) {
-  return fetch(`${process.env.URL}/api/prompt/new`, {
+  return fetch(`/api/prompt/new`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

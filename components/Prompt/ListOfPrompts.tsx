@@ -1,13 +1,12 @@
 import { IPrompt } from "@/types/prompt.types";
 import PromptCard from "./PromptCard";
-import { useEffect, useState } from "react";
 import getPrompts from "@/services/getPrompts.service";
 
 async function ListOfPrompts() {
   const prompts: IPrompt[] = await getPrompts();
 
   return (
-    <section>
+    <section className="absolute top-0 flex flex-wrap justify-center gap-3 w-full">
       {prompts?.map((promptMap) => {
         const { _id, creator, prompt, tags } = promptMap;
         return (
@@ -15,6 +14,7 @@ async function ListOfPrompts() {
             key={_id}
             imageUrl={creator.image}
             name={creator.username}
+            email={creator.email}
             prompt={prompt}
             tags={tags}
             userId={creator._id}
