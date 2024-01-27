@@ -17,9 +17,10 @@ const PromptModel = new Schema({
   },
   creator: {
     type: Schema.Types.ObjectId,
+    require: [true, "The creator is required"],
     ref: "User",
   },
 });
 
-const Propmt = models.Prompt || mongoose.model("Prompt", PromptModel);
-export default Propmt;
+const Prompt = models.Prompt || mongoose.model("Prompt", PromptModel);
+export default Prompt;

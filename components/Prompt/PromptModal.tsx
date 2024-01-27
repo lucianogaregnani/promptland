@@ -5,11 +5,13 @@ import CreatePromptSchema, {
   CreatePromptSchemaType,
 } from "@/validations/create-prompt.validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
 
 function PromptModal({ type }: { type: string }) {
+  const { data: session } = useSession();
   const { closeModal, isOpen } = useContext(ModalContext);
   const {
     register,
@@ -19,17 +21,29 @@ function PromptModal({ type }: { type: string }) {
     resolver: zodResolver(CreatePromptSchema),
   });
 
-  useEffect(() => {
-    console.log(errors)
-  })
-
-  const onSubmit: SubmitHandler<CreatePromptSchemaType> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<CreatePromptSchemaType> = (data) => {
+    fetch("/api/prompt/new", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: data.title,
+        prompt: data.prompt,
+        tags: data.tags,
+        creator: session?.user?.id,
+      })
+    }).then((res) => res.ok && closeModal());
+  };
 
   return (
     isOpen && (
       <section className="z-30 fixed top-0 h-screen w-screen bg-black/40 flex flex-col justify-center items-center p-6">
         <div onClick={closeModal} className="z-30 absolute h-screen w-screen" />
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 py-5 px-9 sm:px-16 bg-slate-100 transition-all rounded-2xl items-center justify-center relative z-40">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 py-5 px-9 sm:px-16 bg-slate-100 transition-all rounded-2xl items-center justify-center relative z-40"
+        >
           <button
             onClick={closeModal}
             className="absolute right-2 top-2 text-3xl text-slate-400 bg-slate-200 hover:bg-red-400 hover:text-red-200 rounded-full p-1 transition-all"

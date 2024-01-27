@@ -13,6 +13,10 @@ export const authOptions = {
   ],
   callbacks: {
     async session({ session }: { session: Session }) {
+      const user = await User.findOne({ email:session.user?.email })
+
+      session.user.id = user._id.toString()
+
       return session;
     },
     async signIn(params: SignInParams) {
@@ -20,7 +24,7 @@ export const authOptions = {
         await connectToDB();
 
         const user = await User.findOne({ email: params.profile?.email });
-        console.log(params.user)
+
         if (!user) {
           const newUser = await User.create({
             email: params.user?.email,
