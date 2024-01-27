@@ -62,4 +62,8 @@ form label span {
   .input-type-text {
     @apply  bg-slate-100 p-2 px-4 rounded-2xl max-w-xl border-2 border-slate-200 focus:border-indigo-400 focus:outline-none focus:ring-0
   }
+
+  .error-message {
+    @apply text-red-500 text-sm
+  }
 }

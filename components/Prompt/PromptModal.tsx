@@ -1,19 +1,39 @@
 "use client";
 
 import { ModalContext } from "@/context/ModalProvider";
-import { useContext } from "react";
+import CreatePromptSchema, {
+  CreatePromptSchemaType,
+} from "@/validations/create-prompt.validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext, useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
 
 function PromptModal({ type }: { type: string }) {
   const { closeModal, isOpen } = useContext(ModalContext);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreatePromptSchemaType>({
+    resolver: zodResolver(CreatePromptSchema),
+  });
+
+  useEffect(() => {
+    console.log(errors)
+  })
+
+  const onSubmit: SubmitHandler<CreatePromptSchemaType> = (data) => console.log(data);
 
   return (
     isOpen && (
       <section className="z-30 fixed top-0 h-screen w-screen bg-black/40 flex flex-col justify-center items-center p-6">
         <div onClick={closeModal} className="z-30 absolute h-screen w-screen" />
-        <h1 className="text-white text-3xl font-semibold">{type} post</h1>
-        <form className="flex flex-col gap-4 py-5 px-9 sm:px-16 bg-slate-100 transition-all rounded-2xl items-center justify-center relative z-40">
-          <button onClick={closeModal} className="absolute right-2 top-2 text-3xl text-slate-400 bg-slate-200 hover:bg-red-400 hover:text-red-200 rounded-full p-1 transition-all">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 py-5 px-9 sm:px-16 bg-slate-100 transition-all rounded-2xl items-center justify-center relative z-40">
+          <button
+            onClick={closeModal}
+            className="absolute right-2 top-2 text-3xl text-slate-400 bg-slate-200 hover:bg-red-400 hover:text-red-200 rounded-full p-1 transition-all"
+          >
             <IoClose />
           </button>
           <label>
@@ -22,14 +42,22 @@ function PromptModal({ type }: { type: string }) {
               type="text"
               placeholder="Create a javascript query..."
               className="w-[18rem] sm:w-[20rem] input-type-text"
+              {...register("title")}
             />
+            {errors.title && (
+              <span className="error-message">{errors.title.message}</span>
+            )}
           </label>
           <label>
             <span>Prompt:</span>
             <textarea
               placeholder="Write your prompt here..."
               className="input-type-text w-[18rem] sm:w-[20rem] h-[10rem]"
+              {...register("prompt")}
             />
+            {errors.prompt && (
+              <span className="error-message">{errors.prompt.message}</span>
+            )}
           </label>
           <label>
             <span>Tags:</span>
@@ -37,7 +65,11 @@ function PromptModal({ type }: { type: string }) {
               type="text"
               placeholder="#tag"
               className="input-type-text w-[18rem] sm:w-[20rem]"
+              {...register("tags")}
             />
+            {errors.tags && (
+              <span className="error-message">{errors.tags.message}</span>
+            )}
           </label>
           <button className="normalBtn w-full">Submit</button>
         </form>
