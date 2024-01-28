@@ -9,7 +9,7 @@ const PromptsSkeleton = ({ cards }: { cards: number }) => {
       {Array(cards).fill(0).map((card) => (
         <article
           key={card}
-          className="flex flex-col gap-2 min-w-[25rem] p-5 rounded-2xl border-2"
+          className="flex flex-col gap-2 min-w-[25rem] p-5 rounded-2xl  border-slate-100"
         >
           <header className="flex gap-2 items-center">
             <div>

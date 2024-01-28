@@ -19,7 +19,7 @@ function PromptCard({
   userId,
 }: PromptCardProps) {
   return (
-    <article className="flex flex-col gap-2 min-w-[25rem] p-5 rounded-2xl border-2">
+    <article className="flex flex-col gap-2 w-[25rem] p-5 rounded-2xl border-2">
       <Link href="">
         <header className="flex gap-2">
           <Image
@@ -36,7 +36,7 @@ function PromptCard({
         </header>
       </Link>
       <p className="text-lg">{prompt}</p>
-      <p className="text-lg text-tags-gradient font-semibold max-w-[20rem]">#{tags}</p>
+      <p className="text-lg text-tags-gradient font-semibold">#{tags}</p>
     </article>
   );
 }
