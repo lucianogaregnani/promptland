@@ -8,10 +8,11 @@ async function ListOfPrompts() {
   return (
     <section className="absolute top-0 flex flex-wrap justify-center gap-3 w-full">
       {prompts?.map((promptMap) => {
-        const { _id, creator, prompt, tags } = promptMap;
+        const { _id, creator, prompt, tags, title } = promptMap;
         return (
           <PromptCard
             key={_id}
+            title={title}
             imageUrl={creator.image}
             name={creator.username}
             email={creator.email}

@@ -7,6 +7,8 @@ import CreatePromptSchema, {
 } from "@/validations/create-prompt.validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
+import { revalidatePath } from "next/cache";
+import { usePathname } from "next/navigation";
 import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
@@ -29,7 +31,7 @@ function PromptModal({ type }: { type: string }) {
       title,
       prompt,
       tags,
-      userId: session?.user?.id,
+      userId: session?.user?.id
     }).then((res) => res.ok && closeModal());
   };
 

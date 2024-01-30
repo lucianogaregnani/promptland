@@ -3,8 +3,8 @@ import { z } from "zod";
 const CreatePromptSchema = z.object({
     title: z.string().min(3, {
         message: "The title must contain at least 3 characters"
-    }).max(15, {
-        message: "The title must be less than 15 characters"
+    }).max(20, {
+        message: "The title must be less than 20 characters"
     }),
     prompt: z.string().min(10, {
         message: "The prompt must contain at least 10 character"

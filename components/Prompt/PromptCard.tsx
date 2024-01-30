@@ -1,12 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import { LuCopyCheck } from "react-icons/lu";
+import { FiCopy } from "react-icons/fi";
+import ButtonCopy from "./Buttons/ButtonCopy";
+import ButtonDelete from "./Buttons/ButtonDelete";
+
 interface PromptCardProps {
   imageUrl: string;
   name: string;
   prompt: string;
   tags: string;
   email: string;
+  title: string;
   userId: string;
 }
 
@@ -16,27 +23,36 @@ function PromptCard({
   prompt,
   tags,
   email,
+  title,
   userId,
 }: PromptCardProps) {
+
   return (
-    <article className="flex flex-col gap-2 w-[25rem] p-5 rounded-2xl border-2">
-      <Link href="">
-        <header className="flex gap-2">
-          <Image
-            src={imageUrl}
-            alt={`${name}'s profile picture`}
-            height={50}
-            width={50}
-            className="rounded-full"
-          />
-          <div>
-            <h1 className="font-bold">{name}</h1>
-            <p className="text-slate-400">{email}</p>
+    <article className="flex flex-col gap-2 w-[25rem] p-4 rounded-2xl border-2">
+        <header className="flex justify-between">
+          <Link href="" className="flex gap-2">
+            <Image
+              src={imageUrl}
+              alt={`${name}'s profile picture`}
+              height={50}
+              width={50}
+              className="rounded-full"
+            />
+            <div>
+              <h5 className="font-bold text-md">{name}</h5>
+              <p className="text-slate-400">{email}</p>
+            </div>
+          </Link>
+          <div className="flex gap-2 items-start">
+            <ButtonDelete />
+            <ButtonCopy textToCopy={prompt}/>
           </div>
         </header>
-      </Link>
-      <p className="text-lg">{prompt}</p>
-      <p className="text-lg text-tags-gradient font-semibold">#{tags}</p>
+      <div>
+        <h4 className="font-bold text-xl">{title}</h4>
+        <p className="text-md">{prompt}</p>
+        <p className="text-lg text-tags-gradient font-semibold">#{tags}</p>
+      </div>
     </article>
   );
 }
