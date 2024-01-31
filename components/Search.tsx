@@ -2,13 +2,14 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
 function Search() {
   const searchParams = useSearchParams()
   const { replace } = useRouter()
   const pathName = usePathname()
 
-  const handleChange = (search:string) => {
+  const handleChange = useDebouncedCallback((search:string) => {
     const params = new URLSearchParams(searchParams)
 
     if(search) {
@@ -18,14 +19,14 @@ function Search() {
     }
 
     replace(`${pathName}?${params.toString()}`)
-  }
+  }, 300)
 
   return (
     <input
       type="text"
       placeholder="Search prompt..."
       className="w-[90%] sm:w-full input-type-text"
-      value={searchParams.get('query')?.toString()}
+      defaultValue={searchParams.get('query')?.toString() || ""}
       onChange={(e) => handleChange(e.target.value)}
     />
   );

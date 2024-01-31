@@ -5,6 +5,8 @@ import ButtonCopy from "./Buttons/ButtonCopy";
 import ButtonDelete from "./Buttons/ButtonDelete";
 import EditButton from "./Buttons/EditButton";
 
+import blurImage from "@/assets/blurImage.png"
+
 interface PromptCardProps {
   imageUrl: string;
   name: string;
@@ -36,6 +38,8 @@ function PromptCard({
             height={50}
             width={50}
             className="rounded-full"
+            placeholder="blur"
+            blurDataURL="./assets/blurImage.png"
           />
           <div>
             <h5 className="font-bold text-md">{name}</h5>
@@ -44,7 +48,7 @@ function PromptCard({
         </Link>
         <div className="flex gap-2 items-start">
           <ButtonDelete userId={userId} promptId={promptId} />
-          <EditButton promptId={promptId} />
+          <EditButton userId={userId} promptId={promptId} />
           <ButtonCopy textToCopy={prompt} />
         </div>
       </header>

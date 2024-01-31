@@ -5,10 +5,12 @@ export function filterPrompts(prompts: IPrompt[], search: string) {
 }
 
 export function filterPrompt(prompt: IPrompt, search: string) {
+  const searchLower = search.toLocaleLowerCase();
+
   return (
-    prompt.prompt.includes(search) ||
-    prompt.tags.includes(search) ||
-    prompt.title.includes(search) ||
-    prompt.creator?.username.includes(search)
+    prompt.prompt.toLocaleLowerCase().includes(searchLower) ||
+    prompt.tags.toLocaleLowerCase().includes(searchLower) ||
+    prompt.title.toLocaleLowerCase().includes(searchLower) ||
+    prompt.creator?.username.toLocaleLowerCase().includes(searchLower)
   );
 }

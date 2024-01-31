@@ -53,7 +53,6 @@ function PromptModal({
         prompt,
         tags,
       }).then((res) => {
-        console.log(res)
         res.ok && closeModal()
       });
     } else {
