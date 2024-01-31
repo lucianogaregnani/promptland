@@ -6,10 +6,10 @@ const PromptsSkeleton = ({ cards }: { cards: number }) => {
 
   return (
     <section className="absolute top-0 flex flex-wrap justify-center gap-3 w-full">
-      {Array(cards).fill(0).map((card, index) => (
+      {Array(cards).fill(0).map((_card, index) => (
         <article
           key={index}
-          className="flex flex-col gap-2 w-[25rem] p-5 rounded-2xl border-slate-100"
+          className="flex flex-col gap-2 w-[27rem] p-5 rounded-2xl border-slate-100"
         >
           <header className="flex gap-2 items-center">
             <div>
