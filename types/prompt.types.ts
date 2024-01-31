@@ -10,5 +10,5 @@ export interface IPrompt {
     title: string,
     prompt: string,
     tags:string,
-    creator: IUser
+    creator?: IUser
 }

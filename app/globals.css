@@ -52,6 +52,10 @@ form label span {
     @apply btn bg-red-500 hover:bg-red-400 text-white 
   }
 
+  .promptBtn {
+    @apply w-8 h-8 flex items-center justify-center rounded-full transition-all p-2
+  }
+
   .transparent-normal-btn {
     @apply btn border-2 border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white
   }
@@ -75,4 +79,5 @@ form label span {
   .error-message {
     @apply text-red-500 text-sm
   }
+
 }

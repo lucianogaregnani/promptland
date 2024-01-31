@@ -1,5 +1,6 @@
 import Prompt from "@/models/Prompt.model"
 import connectToDB from "@/utils/database"
+import { revalidatePath } from "next/cache"
 
 
 export const GET = async () => {

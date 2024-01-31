@@ -3,8 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import GoogleProvider from "@/components/GoogleProvider";
 import Nav from "@/components/Nav/Nav";
-import ModalProvider from "@/context/ModalProvider";
-import PromptModal from "@/components/Prompt/PromptModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,11 +21,8 @@ export default function RootLayout({
       <body className={`text-slate-700 ${inter.className}`}>
         <div className="gradient" />
         <GoogleProvider>
-          <ModalProvider>
             <Nav />
             <main className="relative z-10">{children}</main>
-            <PromptModal type="Create"/>
-          </ModalProvider>
         </GoogleProvider>
       </body>
     </html>

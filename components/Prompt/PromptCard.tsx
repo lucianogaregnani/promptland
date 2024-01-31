@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import ButtonCopy from "./Buttons/ButtonCopy";
 import ButtonDelete from "./Buttons/ButtonDelete";
+import EditButton from "./Buttons/EditButton";
 
 interface PromptCardProps {
   imageUrl: string;
@@ -44,13 +45,14 @@ function PromptCard({
           </Link>
           <div className="flex gap-2 items-start">
             <ButtonDelete userId={userId} promptId={promptId}/>
+            <EditButton promptId={promptId} />
             <ButtonCopy textToCopy={prompt}/>
           </div>
         </header>
       <div>
         <h4 className="font-bold text-xl text-slate-500">{title}</h4>
         <p className="text-md">{prompt}</p>
-        <p className="text-lg text-tags-gradient font-semibold">#{tags}</p>
+        <p className="text-lg text-tags-gradient font-semibold">{tags}</p>
       </div>
     </article>
   );

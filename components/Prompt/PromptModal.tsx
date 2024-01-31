@@ -1,21 +1,32 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { ModalContext } from "@/context/ModalProvider";
 import createPrompt from "@/services/createPrompt.service";
+import getPromptById from "@/services/getPromptById.service";
+import updatePrompt from "@/services/updatePrompt.service";
+import { IPrompt } from "@/types/prompt.types";
 import CreatePromptSchema, {
   CreatePromptSchemaType,
 } from "@/validations/create-prompt.validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
-import { revalidatePath } from "next/cache";
-import { usePathname } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
 
-function PromptModal({ type }: { type: string }) {
+function PromptModal({
+  type,
+  promptId,
+  closeModal,
+  isOpen
+}: {
+  type: "update" | "create";
+  promptId?: string;
+  closeModal: () => void,
+  isOpen: boolean
+}) {
   const { data: session } = useSession();
-  const { closeModal, isOpen } = useContext(ModalContext);
+
   const {
     register,
     handleSubmit,
@@ -23,21 +34,41 @@ function PromptModal({ type }: { type: string }) {
   } = useForm<CreatePromptSchemaType>({
     resolver: zodResolver(CreatePromptSchema),
   });
+  const [prompt, setPrompt] = useState<IPrompt>();
+
+  useEffect(() => {
+    if (promptId) {
+      getPromptById(promptId)
+        .then(prompt => setPrompt(prompt))
+    }
+  }, []);
 
   const onSubmit: SubmitHandler<CreatePromptSchemaType> = (data) => {
     const { title, prompt, tags } = data;
 
-    createPrompt({
-      title,
-      prompt,
-      tags,
-      userId: session?.user?.id
-    }).then((res) => res.ok && closeModal());
+    if (type === "update") {
+      updatePrompt({
+        promptId,
+        title,
+        prompt,
+        tags,
+      }).then((res) => {
+        console.log(res)
+        res.ok && closeModal()
+      });
+    } else {
+      createPrompt({
+        title,
+        prompt,
+        tags,
+        userId: session?.user?.id,
+      }).then((res) => res.ok && closeModal());
+    }
   };
 
   return (
     isOpen && (
-      <section className="z-30 fixed top-0 h-screen w-screen flex flex-col justify-center items-center">
+      <section className="z-30 fixed top-0 left-0 h-screen w-screen flex flex-col justify-center items-center">
         <div
           onClick={closeModal}
           className="z-30 absolute h-screen w-screen bg-black/40"
@@ -58,6 +89,7 @@ function PromptModal({ type }: { type: string }) {
               type="text"
               placeholder="Create a javascript query..."
               className="w-[18rem] sm:w-[20rem] input-type-text"
+              defaultValue={prompt?.title || ""}
               {...register("title")}
             />
             {errors.title && (
@@ -69,6 +101,7 @@ function PromptModal({ type }: { type: string }) {
             <textarea
               placeholder="Write your prompt here..."
               className="input-type-text w-[18rem] sm:w-[20rem] h-[10rem]"
+              defaultValue={prompt?.prompt || ""}
               {...register("prompt")}
             />
             {errors.prompt && (
@@ -81,13 +114,14 @@ function PromptModal({ type }: { type: string }) {
               type="text"
               placeholder="#tag"
               className="input-type-text w-[18rem] sm:w-[20rem]"
+              defaultValue={prompt?.tags || ""}
               {...register("tags")}
             />
             {errors.tags && (
               <span className="error-message">{errors.tags.message}</span>
             )}
           </label>
-          <button className="normalBtn w-full">Submit</button>
+          <button className="normalBtn w-full">{type === "create" ? "Create" : "Update"}</button>
         </form>
       </section>
     )

@@ -18,20 +18,19 @@ function ButtonDelete({
   const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
 
-  const handleClick = () => {
-      setIsLoading(true);
-      deletePrompt(promptId).then((res) => res.ok && setIsLoading(false));
+  const handleClick = async () => {
+    setIsLoading(true);
+    await deletePrompt(promptId);
+    setIsLoading(false);
   };
 
   return (
     session?.user.id === userId && (
       <button
         onClick={handleClick}
-        className="w-8 h-8 flex items-center justify-center bg-red-500 p-2 text-white/60 rounded-full hover:bg-red-400 transition-all"
+        className="promptBtn bg-red-500 text-white/60 hover:bg-red-400"
       >
-        {
-            isLoading ? <p>...</p>: <MdOutlineDeleteOutline />
-        }
+        {isLoading ? <p>...</p> : <MdOutlineDeleteOutline />}
       </button>
     )
   );

@@ -13,12 +13,12 @@ async function ListOfPrompts() {
           <PromptCard
             key={_id}
             title={title}
-            imageUrl={creator.image}
-            name={creator.username}
-            email={creator.email}
+            imageUrl={creator?.image || ""}
+            name={creator?.username || ""}
+            email={creator?.email || ""}
             prompt={prompt}
             tags={tags}
-            userId={creator._id}
+            userId={creator?._id || ""}
             promptId={_id}
           />
         );
