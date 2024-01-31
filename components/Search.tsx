@@ -25,7 +25,7 @@ function Search() {
       type="text"
       placeholder="Search prompt..."
       className="w-[90%] sm:w-full input-type-text"
-      defaultValue={searchParams.get('query')?.toString()}
+      value={searchParams.get('query')?.toString()}
       onChange={(e) => handleChange(e.target.value)}
     />
   );

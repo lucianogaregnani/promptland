@@ -51,7 +51,9 @@ function PromptCard({
       <div>
         <h4 className="font-bold text-xl text-slate-500">{title}</h4>
         <p className="text-md">{prompt}</p>
-        <p className="text-lg text-tags-gradient font-semibold">{tags}</p>
+        <Link href={`/?query=${tags.replace('#', '')}`}>
+          <p className="text-lg text-tags-gradient font-semibold">{tags}</p>
+        </Link>
       </div>
     </article>
   );
