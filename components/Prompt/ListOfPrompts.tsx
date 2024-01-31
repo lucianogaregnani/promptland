@@ -6,7 +6,7 @@ async function ListOfPrompts() {
   const prompts: IPrompt[] = await getPrompts();
 
   return (
-    <section className="absolute top-0 flex flex-wrap justify-center gap-3 w-full">
+    <section className="absolute top-0 flex flex-wrap justify-center gap-3 w-full pb-3">
       {prompts?.map((promptMap) => {
         const { _id, creator, prompt, tags, title } = promptMap;
         return (
@@ -19,6 +19,7 @@ async function ListOfPrompts() {
             prompt={prompt}
             tags={tags}
             userId={creator._id}
+            promptId={_id}
           />
         );
       })}

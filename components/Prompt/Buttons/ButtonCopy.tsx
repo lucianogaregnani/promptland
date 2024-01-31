@@ -17,8 +17,8 @@ function ButtoCopy({ textToCopy }:{ textToCopy:string }) {
 
   return (
     <button
-      className={`w-8 h-8 flex items-center justify-center p-2 text-white rounded-full ${
-        isCopied ? "bg-indigo-400" : "bg-gray-400 hover:bg-gray-500"
+      className={`w-8 h-8 flex items-center justify-center p-2 rounded-full ${
+        isCopied ? "bg-indigo-400 text-white" : "border-2 border-indigo-400 text-indigo-400"
       } transition-all`}
       onClick={handleClick}
     >

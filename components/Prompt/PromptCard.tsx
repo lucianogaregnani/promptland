@@ -1,9 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { MdOutlineDeleteOutline } from "react-icons/md";
-import { LuCopyCheck } from "react-icons/lu";
-import { FiCopy } from "react-icons/fi";
 import ButtonCopy from "./Buttons/ButtonCopy";
 import ButtonDelete from "./Buttons/ButtonDelete";
 
@@ -15,6 +12,7 @@ interface PromptCardProps {
   email: string;
   title: string;
   userId: string;
+  promptId: string
 }
 
 function PromptCard({
@@ -25,6 +23,7 @@ function PromptCard({
   email,
   title,
   userId,
+  promptId
 }: PromptCardProps) {
 
   return (
@@ -44,12 +43,12 @@ function PromptCard({
             </div>
           </Link>
           <div className="flex gap-2 items-start">
-            <ButtonDelete />
+            <ButtonDelete userId={userId} promptId={promptId}/>
             <ButtonCopy textToCopy={prompt}/>
           </div>
         </header>
       <div>
-        <h4 className="font-bold text-xl">{title}</h4>
+        <h4 className="font-bold text-xl text-slate-500">{title}</h4>
         <p className="text-md">{prompt}</p>
         <p className="text-lg text-tags-gradient font-semibold">#{tags}</p>
       </div>
