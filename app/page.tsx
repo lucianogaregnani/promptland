@@ -1,9 +1,14 @@
 import PromptsSkeleton from "@/Skeletons/PromptsSkeleton";
 import Notice from "@/components/Notice";
 import ListOfPrompts from "@/components/Prompt/ListOfPrompts";
+import Search from "@/components/Search";
 import { Suspense } from "react";
 
-export default function Home() {
+export default function Home({
+  searchParams,
+}: {
+  searchParams: { query: string };
+}) {
   return (
     <section className="min-h-screen pt-14 flex justify-center items-center flex-col gap-3">
       <Notice />
@@ -14,14 +19,10 @@ export default function Home() {
         Promptland is an open-source AI prompting tool for the modern world,
         enabling users to discover, create, and share creative prompts.
       </p>
-      <input
-        type="text"
-        placeholder="Search prompt..."
-        className="w-[90%] sm:w-full input-type-text"
-      />
+      <Search />
       <div className="relative w-full">
         <Suspense fallback={<PromptsSkeleton cards={3} />}>
-          <ListOfPrompts />
+          <ListOfPrompts search={searchParams.query} />
         </Suspense>
       </div>
     </section>

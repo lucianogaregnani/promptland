@@ -1,13 +1,16 @@
 import { IPrompt } from "@/types/prompt.types";
 import PromptCard from "./PromptCard";
 import getPrompts from "@/services/getPrompts.service";
+import { filterPrompts } from "@/utils/filterPrompt";
 
-async function ListOfPrompts() {
+async function ListOfPrompts({ search }: { search: string }) {
   const prompts: IPrompt[] = await getPrompts();
+
+  const filteredPrompts = search ? filterPrompts(prompts, search) : prompts
 
   return (
     <section className="absolute top-0 flex flex-wrap justify-center gap-3 w-full pb-3">
-      {prompts?.map((promptMap) => {
+      {filteredPrompts?.map((promptMap) => {
         const { _id, creator, prompt, tags, title } = promptMap;
         return (
           <PromptCard
