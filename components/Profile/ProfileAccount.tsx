@@ -1,32 +1,43 @@
 import Image from "next/image";
-import LikedPromptsButton from "./Buttons/LikedPromptsButton";
-import PromptsButton from "./Buttons/PromptsButton";
 import Buttons from "./Buttons/Buttons";
+import getUserById from "@/services/getUserById.service";
+import { Suspense } from "react";
+import PromptsSkeleton from "@/Skeletons/PromptsSkeleton";
+import ListOfPrompts from "../Prompt/ListOfPrompts";
 
-interface ProfileAccountProps {
-  image: string;
-  username: string;
-  email: string;
-}
+async function ProfileAccount({
+  userId,
+  section,
+}: {
+  userId: string;
+  section: string;
+}) {
+  const user = await getUserById(userId);
 
-function ProfileAccount({ image, username, email }: ProfileAccountProps) {
   return (
-    <section className="max-w-3xl m-auto">
+    <section className="max-w-3xl m-auto p-4 mt-20">
       <header className="flex justify-center items-center gap-2">
         <Image
           width={90}
           height={90}
-          alt={`${username}'s profile picture`}
-          src={image}
+          alt={`${user.username}'s profile picture`}
+          src={user.image}
           className="rounded-full"
         />
         <div>
-          <h1 className="text-4xl font-semibold">{username}</h1>
-          <h2 className="text-slate-400 text-xl">{email}</h2>
+          <h1 className="text-4xl font-semibold">{user.username}</h1>
+          <h2 className="text-slate-400 text-xl">{user.email}</h2>
         </div>
       </header>
       <main>
         <Buttons />
+        <section className="relative pb-2">
+          {section === "prompts" && (
+            <Suspense fallback={<PromptsSkeleton cards={3} />}>
+              <ListOfPrompts userId={userId} />
+            </Suspense>
+          )}
+        </section>
       </main>
     </section>
   );

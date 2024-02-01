@@ -31,7 +31,7 @@ function PromptCard({
   return (
     <article className="flex flex-col gap-2 w-[27rem] p-4 rounded-2xl border-2">
       <header className="flex justify-between">
-        <Link href="" className="flex gap-2">
+        <Link href={`/profile/${userId}`} className="flex gap-2">
           <Image
             src={imageUrl}
             alt={`${name}'s profile picture`}

@@ -1,25 +1,44 @@
-"use client"
+/* eslint-disable react-hooks/exhaustive-deps */
+"use client";
 
-import { useState } from "react";
-import LikedPromptsButton from "./LikedPromptsButton";
-import PromptsButton from "./PromptsButton";
+import { useEffect } from "react";
 import ProfileButton from "./ProfileButton";
+import { useSession } from "next-auth/react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 function Buttons() {
-  const [selectedButton, setSelectedButton] = useState<"prompts" | "likedPrompts">("prompts")
+  const { data: session } = useSession();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const { replace } = useRouter();
 
-  const handleClick = (typeButton:"prompts" | "likedPrompts") => {
-    setSelectedButton(typeButton)
-  }
+  useEffect(() => {
+    changeTypeButton("prompts")
+  }, []);
+
+  const changeTypeButton = (typeButton: "prompts" | "likedPrompts") => {
+    params.set("section", typeButton);
+    replace(`${pathname}?${params.toString()}`);
+  };
 
   return (
-    <div className="text-lg font-medium mt-10 flex justify-around">
-      <ProfileButton isSelected={selectedButton === "prompts"} onClick={handleClick} type="prompts">
+    <div className="text-lg font-medium mt-10 flex justify-around mb-3">
+      <ProfileButton
+        onClick={changeTypeButton}
+        type="prompts"
+      >
         Prompts
       </ProfileButton>
-      <ProfileButton isSelected={selectedButton === "likedPrompts"} onClick={handleClick} type="likedPrompts">
-        Liked prompts
-      </ProfileButton>
+      {`/profile/${session?.user.id}` === pathname && (
+        <ProfileButton
+          onClick={changeTypeButton}
+          type="likedPrompts"
+        >
+          Liked prompts
+        </ProfileButton>
+      )}
     </div>
   );
 }

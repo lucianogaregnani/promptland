@@ -1,13 +1,14 @@
 "use client";
 
 import { IoIosAdd } from "react-icons/io";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import usePromptModal from "@/hooks/usePromptModal";
 import PromptModal from "../Prompt/PromptModal";
 
 function SignedInSection({ imageUrl }: { imageUrl: string }) {
+  const { data:session } = useSession()
   const { isOpen, closeModal, openModal } = usePromptModal()
 
   return (
@@ -25,7 +26,7 @@ function SignedInSection({ imageUrl }: { imageUrl: string }) {
         <button className="redBtn" onClick={() => signOut()}>
           Sign out
         </button>
-        <Link href="">
+        <Link href={`/profile/${session?.user.id}`}>
           <Image
             src={imageUrl}
             alt="Profile picture"

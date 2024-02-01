@@ -3,10 +3,20 @@ import PromptCard from "./PromptCard";
 import getPrompts from "@/services/getPrompts.service";
 import { filterPrompts } from "@/utils/filterPrompt";
 
-async function ListOfPrompts({ search }: { search: string }) {
+async function ListOfPrompts({
+  search,
+  userId,
+}: {
+  search?: string;
+  userId?: string;
+}) {
   const prompts: IPrompt[] = await getPrompts();
 
-  const filteredPrompts = search ? filterPrompts(prompts, search) : prompts
+  const filteredPrompts = search
+    ? filterPrompts(prompts, search)
+    : userId
+    ? prompts.filter((prompt) => prompt.creator?._id === userId)
+    : prompts;
 
   return (
     <section className="absolute top-0 flex flex-wrap justify-center gap-3 w-full pb-3">
