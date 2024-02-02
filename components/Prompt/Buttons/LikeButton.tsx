@@ -13,7 +13,7 @@ function LikeButton({ prompt }: { prompt: IPrompt }) {
   return (
     session && (
       <button
-        onClick={() => addLikedPrompt(prompt)}
+        onClick={addLikedPrompt}
         className={`text-2xl ${
           isLikedButton ? "text-red-500" : "text-slate-300"
         } mr-[0.3rem]`}

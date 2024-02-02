@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+
 import { IPrompt } from "@/types/prompt.types";
 import {
   addPromptToLocalStorage,
@@ -10,16 +11,18 @@ import { useEffect, useState } from "react";
 function useLikeButton(prompt: IPrompt, userId: string) {
   const [isLikedButton, setIsLikedButton] = useState(false);
 
-  const promptFinded = getLikedPrompts(userId).find(
-    (promptMap) => promptMap._id === prompt._id
-  );
-
   useEffect(() => {
-    setIsLikedButton(!!promptFinded);
+    if (userId) {
+      setIsLikedButton(
+        !!getLikedPrompts(userId).find(
+          (promptMap) => promptMap._id === prompt._id
+        )
+      );
+    }
   }, [userId]);
 
-  const addLikedPrompt = (prompt: IPrompt) => {
-    if (!promptFinded) {
+  const addLikedPrompt = () => {
+    if (!isLikedButton) {
       addPromptToLocalStorage(prompt, userId);
       setIsLikedButton(true);
     } else {
