@@ -1,3 +1,5 @@
+"use client"
+
 import { IPrompt } from "@/types/prompt.types";
 import PromptCard from "./PromptCard";
 

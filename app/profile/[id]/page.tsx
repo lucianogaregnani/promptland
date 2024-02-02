@@ -7,11 +7,7 @@ function ProfilePage({
   params: { id: string };
   searchParams: { section: string };
 }) {
-  return (
-    <>
-      <ProfileAccount userId={id} section={searchParams.section} />
-    </>
-  );
+  return <ProfileAccount userId={id} section={searchParams.section} />;
 }
 
 export default ProfilePage;

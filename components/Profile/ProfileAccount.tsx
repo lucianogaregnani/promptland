@@ -2,6 +2,7 @@ import Image from "next/image";
 import Buttons from "./Buttons/Buttons";
 import getUserById from "@/services/getUserById.service";
 import ListOfPromptsProfile from "./ListOfPromptsProfile";
+import ListOfFavoritePrompts from "./ListOfFavoritePrompts";
 
 async function ProfileAccount({
   userId,
@@ -30,7 +31,7 @@ async function ProfileAccount({
       <main>
         <Buttons />
         <section className="relative pb-2">
-          {section === "prompts" && <ListOfPromptsProfile userId={userId} />}
+          {section === "prompts" ? <ListOfPromptsProfile userId={userId} /> : <ListOfFavoritePrompts userId={userId} />}
         </section>
       </main>
     </section>

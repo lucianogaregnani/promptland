@@ -1,9 +1,6 @@
-import PromptsSkeleton from "@/Skeletons/PromptsSkeleton";
-import ListOfPromptsHome from "@/components/ListOfPromptsHome";
-import Notice from "@/components/Notice";
-import ListOfPrompts from "@/components/Prompt/ListOfPrompts";
-import Search from "@/components/Search";
-import { Suspense } from "react";
+import ListOfPromptsHome from "@/components/Home/ListOfPromptsHome";
+import Notice from "@/components/Home/Notice";
+import Search from "@/components/Home/Search";
 
 export default function Home({
   searchParams,

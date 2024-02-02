@@ -1,5 +1,5 @@
 import { IPrompt } from "@/types/prompt.types";
-import ListOfPrompts from "./Prompt/ListOfPrompts";
+import ListOfPrompts from "../Prompt/ListOfPrompts";
 import PromptsSkeleton from "@/Skeletons/PromptsSkeleton";
 import getPrompts from "@/services/getPrompts.service";
 import { Suspense } from "react";
