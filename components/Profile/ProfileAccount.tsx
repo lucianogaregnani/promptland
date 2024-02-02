@@ -14,8 +14,8 @@ async function ProfileAccount({
   const user = await getUserById(userId);
 
   return (
-    <section className="max-w-3xl m-auto p-4 mt-20">
-      <header className="flex justify-center items-center gap-2">
+    <section className="m-auto p-4 mt-20">
+      <header className="flex justify-center items-center gap-2 sm:flex-row flex-col">
         <Image
           width={90}
           height={90}

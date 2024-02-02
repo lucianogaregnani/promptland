@@ -24,7 +24,7 @@ function Buttons() {
   };
 
   return (
-    <div className="text-lg font-medium mt-10 flex justify-around mb-3">
+    <div className="max-w-3xl mx-auto text-lg font-medium mt-10 flex justify-around mb-3">
       <ProfileButton
         onClick={changeTypeButton}
         type="prompts"

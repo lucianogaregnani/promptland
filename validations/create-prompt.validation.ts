@@ -11,7 +11,9 @@ const CreatePromptSchema = z.object({
     }).max(200, {
         message: "The prompt must be less than 200 characters"
     }), 
-    tags: z.string()
+    tags: z.string().max(25, {
+        message: "The tags must be less than 25 characters"
+    })
 })
 
 export type CreatePromptSchemaType = z.infer<typeof CreatePromptSchema>

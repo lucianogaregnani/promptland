@@ -19,10 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`text-slate-700 ${inter.className}`}>
-        <div className="gradient" />
         <GoogleProvider>
             <Nav />
-            <main className="relative z-10">{children}</main>
+            <main className="">{children}</main>
         </GoogleProvider>
       </body>
     </html>

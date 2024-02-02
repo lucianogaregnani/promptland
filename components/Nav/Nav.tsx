@@ -9,8 +9,8 @@ function Nav() {
   const { data: session } = useSession();
 
   return (
-    <nav className="fixed z-20 top-0 w-full flex justify-between p-6 items-center">
-      <Link className="text-2xl font-semibold" href="/">
+    <nav className="fixed z-10 top-0 w-full flex justify-between p-4 items-center sm:backdrop-blur-[1px]">
+      <Link className="text-2xl font-semibold bg-white sm:bg-transparent sm:shadow-none shadow-sm p-3 rounded-full sm:bg-none sm:p-0" href="/">
         prompt<span className="text-indigo-500">land</span>
       </Link>
       {session ? (

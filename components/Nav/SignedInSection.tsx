@@ -1,4 +1,4 @@
-"use client";
+
 
 import { IoIosAdd } from "react-icons/io";
 import { signOut, useSession } from "next-auth/react";
@@ -13,7 +13,7 @@ function SignedInSection({ imageUrl }: { imageUrl: string }) {
 
   return (
     <>
-      <section className="flex gap-2">
+      <section className="flex gap-2 bg-white sm:bg-transparent shadow-sm sm:shadow-none p-1 sm:p-0 rounded-full">
         <button
           className="fixed bottom-5 right-6 sm:transparent-normal-btn sm:static"
           onClick={openModal}

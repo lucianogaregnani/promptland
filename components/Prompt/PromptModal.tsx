@@ -67,7 +67,7 @@ function PromptModal({
 
   return (
     isOpen && (
-      <section className="z-30 fixed top-0 left-0 h-screen w-screen flex flex-col justify-center items-center">
+      <section className="z-20 fixed top-0 left-0 h-screen w-screen flex flex-col justify-center items-center">
         <div
           onClick={closeModal}
           className="z-30 absolute h-screen w-screen bg-black/40"
