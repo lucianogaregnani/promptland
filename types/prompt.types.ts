@@ -12,3 +12,7 @@ export interface IPrompt {
     tags:string,
     creator?: IUser
 }
+
+export interface LikedPrompt extends IPrompt {
+    userIdLiked: string
+}

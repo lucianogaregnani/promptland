@@ -5,7 +5,7 @@ import ButtonCopy from "./Buttons/ButtonCopy";
 import ButtonDelete from "./Buttons/ButtonDelete";
 import EditButton from "./Buttons/EditButton";
 
-import blurImage from "@/assets/blurImage.png"
+import LikeButton from "./Buttons/LikeButton";
 
 interface PromptCardProps {
   imageUrl: string;
@@ -55,9 +55,25 @@ function PromptCard({
       <div>
         <h4 className="font-bold text-xl text-slate-500">{title}</h4>
         <p className="text-md">{prompt}</p>
-        <Link href={`/?query=${tags.replace('#', '')}`}>
-          <p className="text-lg text-tags-gradient font-semibold">{tags}</p>
-        </Link>
+        <div className="flex justify-between">
+          <Link href={`/?query=${tags.replace("#", "")}`}>
+            <p className="text-lg text-tags-gradient font-semibold">{tags}</p>
+          </Link>
+          <LikeButton
+            prompt={{
+              _id: promptId,
+              title,
+              tags,
+              prompt,
+              creator: {
+                _id: userId,
+                image: imageUrl,
+                email,
+                username: name,
+              },
+            }}
+          />
+        </div>
       </div>
     </article>
   );

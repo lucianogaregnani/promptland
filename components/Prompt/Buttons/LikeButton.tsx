@@ -1,0 +1,27 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+"use client";
+
+import useLikeButton from "@/hooks/useLikeButton";
+import { IPrompt } from "@/types/prompt.types";
+import { useSession } from "next-auth/react";
+import { FaHeart } from "react-icons/fa";
+
+function LikeButton({ prompt }: { prompt: IPrompt }) {
+  const { data: session } = useSession();
+  const { isLikedButton, addLikedPrompt } = useLikeButton(prompt);
+
+  return (
+    session && (
+      <button
+        onClick={() => addLikedPrompt(prompt)}
+        className={`text-2xl ${
+          isLikedButton ? "text-red-500" : "text-slate-300"
+        } mr-[0.3rem]`}
+      >
+        <FaHeart />
+      </button>
+    )
+  );
+}
+
+export default LikeButton;
