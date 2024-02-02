@@ -5,25 +5,25 @@ import {
   getLikedPrompts,
   removePromptToLocalStorage,
 } from "@/utils/localStorage";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-function useLikeButton(prompt:IPrompt) {
-  const { data: session } = useSession();
+function useLikeButton(prompt: IPrompt, userId: string) {
   const [isLikedButton, setIsLikedButton] = useState(false);
 
+  const promptFinded = getLikedPrompts(userId).find(
+    (promptMap) => promptMap._id === prompt._id
+  );
+
   useEffect(() => {
-    setIsLikedButton(
-      !!getLikedPrompts(session?.user.id || "").find((promptMap) => (promptMap._id === prompt._id))
-    );
-  }, [session]);
+    setIsLikedButton(!!promptFinded);
+  }, [userId]);
 
   const addLikedPrompt = (prompt: IPrompt) => {
-    if (!getLikedPrompts(session?.user.id || "").find((promptMap) => promptMap._id === prompt._id)) {
-      addPromptToLocalStorage(prompt, session?.user.id || "");
+    if (!promptFinded) {
+      addPromptToLocalStorage(prompt, userId);
       setIsLikedButton(true);
     } else {
-      removePromptToLocalStorage(prompt, session?.user.id || "");
+      removePromptToLocalStorage(prompt, userId);
       setIsLikedButton(false);
     }
   };

@@ -1,9 +1,7 @@
 import Image from "next/image";
 import Buttons from "./Buttons/Buttons";
 import getUserById from "@/services/getUserById.service";
-import { Suspense } from "react";
-import PromptsSkeleton from "@/Skeletons/PromptsSkeleton";
-import ListOfPrompts from "../Prompt/ListOfPrompts";
+import ListOfPromptsProfile from "./ListOfPromptsProfile";
 
 async function ProfileAccount({
   userId,
@@ -32,11 +30,7 @@ async function ProfileAccount({
       <main>
         <Buttons />
         <section className="relative pb-2">
-          {section === "prompts" && (
-            <Suspense fallback={<PromptsSkeleton cards={3} />}>
-              <ListOfPrompts userId={userId} />
-            </Suspense>
-          )}
+          {section === "prompts" && <ListOfPromptsProfile userId={userId} />}
         </section>
       </main>
     </section>

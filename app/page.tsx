@@ -1,4 +1,5 @@
 import PromptsSkeleton from "@/Skeletons/PromptsSkeleton";
+import ListOfPromptsHome from "@/components/ListOfPromptsHome";
 import Notice from "@/components/Notice";
 import ListOfPrompts from "@/components/Prompt/ListOfPrompts";
 import Search from "@/components/Search";
@@ -9,6 +10,7 @@ export default function Home({
 }: {
   searchParams: { query: string };
 }) {
+
   return (
     <section className="min-h-screen pt-14 flex justify-center items-center flex-col gap-3">
       <Notice />
@@ -21,9 +23,7 @@ export default function Home({
       </p>
       <Search />
       <div className="relative w-full">
-        <Suspense fallback={<PromptsSkeleton cards={3} />}>
-          <ListOfPrompts search={searchParams.query} />
-        </Suspense>
+        <ListOfPromptsHome query={searchParams.query}/>
       </div>
     </section>
   );

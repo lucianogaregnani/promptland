@@ -8,7 +8,7 @@ import { FaHeart } from "react-icons/fa";
 
 function LikeButton({ prompt }: { prompt: IPrompt }) {
   const { data: session } = useSession();
-  const { isLikedButton, addLikedPrompt } = useLikeButton(prompt);
+  const { isLikedButton, addLikedPrompt } = useLikeButton(prompt, session?.user.id || "");
 
   return (
     session && (
