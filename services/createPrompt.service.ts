@@ -5,8 +5,8 @@ interface CreatePromptParams {
     userId:string | undefined
 }
 
-function createPrompt({ title, prompt, tags, userId }:CreatePromptParams) {
-  return fetch(`/api/prompt/new`, {
+async function createPrompt({ title, prompt, tags, userId }:CreatePromptParams) {
+  const response = await fetch(`/api/prompt/new`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -17,7 +17,9 @@ function createPrompt({ title, prompt, tags, userId }:CreatePromptParams) {
       tags,
       creator: userId,
     }),
-  });
+  })
+
+  return response
 }
 
 export default createPrompt;

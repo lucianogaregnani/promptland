@@ -11,8 +11,6 @@ export const DELETE = async (
         
         const deletedUser = await Prompt.findByIdAndDelete(id)
 
-        revalidatePath('/')
-
         return new Response(JSON.stringify(deletedUser), { status: 200 })
     } catch (error:any) {
         return new Response(JSON.stringify({ error:error.message }), { status:404 })

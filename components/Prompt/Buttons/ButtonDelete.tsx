@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import { revalidatePage } from "@/actions/revalidatePage";
 import deletePrompt from "@/services/deletePrompt.service";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
@@ -16,11 +17,11 @@ function ButtonDelete({
 }) {
   const { data: session } = useSession();
   const [isLoading, setIsLoading] = useState(false);
-  const pathname = usePathname();
 
   const handleClick = async () => {
     setIsLoading(true);
     await deletePrompt(promptId);
+    await revalidatePage()
     setIsLoading(false);
   };
 

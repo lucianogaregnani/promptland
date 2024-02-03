@@ -18,8 +18,6 @@ export const PATCH = async (
       title,
     });
 
-    revalidatePath('/')
-
     return new Response(JSON.stringify(updatedUser), { status: 201 });
   } catch (error: any) {
     return new Response(JSON.stringify({ error: error.message }), {

@@ -13,8 +13,6 @@ export const POST = async (request: Request) => {
       creator,
     });
 
-    revalidatePath("/");
-
     return new Response(JSON.stringify(newPrompt), { status: 201 });
   } catch (error) {
     return new Response("Failed to create a prompt", { status: 500 });

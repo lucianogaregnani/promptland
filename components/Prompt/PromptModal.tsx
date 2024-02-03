@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import { revalidatePage } from "@/actions/revalidatePage";
 import createPrompt from "@/services/createPrompt.service";
 import getPromptById from "@/services/getPromptById.service";
 import updatePrompt from "@/services/updatePrompt.service";
@@ -18,12 +19,12 @@ function PromptModal({
   type,
   promptId,
   closeModal,
-  isOpen
+  isOpen,
 }: {
   type: "update" | "create";
   promptId?: string;
-  closeModal: () => void,
-  isOpen: boolean
+  closeModal: () => void;
+  isOpen: boolean;
 }) {
   const { data: session } = useSession();
 
@@ -38,31 +39,31 @@ function PromptModal({
 
   useEffect(() => {
     if (promptId) {
-      getPromptById(promptId)
-        .then(prompt => setPrompt(prompt))
+      getPromptById(promptId).then((prompt) => setPrompt(prompt));
     }
   }, []);
 
-  const onSubmit: SubmitHandler<CreatePromptSchemaType> = (data) => {
+  const onSubmit: SubmitHandler<CreatePromptSchemaType> = async (data) => {
     const { title, prompt, tags } = data;
+    let response;
 
     if (type === "update") {
-      updatePrompt({
+      response = await updatePrompt({
         promptId,
         title,
         prompt,
         tags,
-      }).then((res) => {
-        res.ok && closeModal()
       });
     } else {
-      createPrompt({
+      response = await createPrompt({
         title,
         prompt,
         tags,
         userId: session?.user?.id,
-      }).then((res) => res.ok && closeModal());
+      });
     }
+    response.ok && closeModal()
+    await revalidatePage()
   };
 
   return (
@@ -120,7 +121,9 @@ function PromptModal({
               <span className="error-message">{errors.tags.message}</span>
             )}
           </label>
-          <button className="normalBtn w-full">{type === "create" ? "Create" : "Update"}</button>
+          <button className="normalBtn w-full">
+            {type === "create" ? "Create" : "Update"}
+          </button>
         </form>
       </section>
     )
