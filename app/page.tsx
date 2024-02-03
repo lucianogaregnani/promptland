@@ -19,7 +19,7 @@ export default function Home({
         enabling users to discover, create, and share creative prompts.
       </p>
       <Search />
-      <div className="relative w-full">
+      <div className="relative flex justify-center">
         <ListOfPromptsHome query={searchParams.query}/>
       </div>
     </section>

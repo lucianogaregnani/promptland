@@ -29,7 +29,7 @@ function PromptCard({
   promptId,
 }: PromptCardProps) {
   return (
-    <article className="relative flex justify-between gap-2 w-[22rem] sm:w-[23rem] p-4 rounded-2xl border-2">
+    <article className="break-inside-avoid relative flex justify-between gap-2 w-[22rem] sm:w-[23rem] p-4 rounded-2xl border-2">
       <div className="flex flex-col gap-2 justify-around">
         <header className="flex justify-between">
           <Link href={`/profile/${userId}`} className="flex gap-2">
@@ -50,7 +50,7 @@ function PromptCard({
         </header>
         <div>
           <h4 className="font-bold text-xl text-slate-500">{title}</h4>
-          <p className="text-md h-[4.5rem] overflow-y-auto scrollbar-thumb-gray-400 scrollbar-track-gray-100 scrollbar-thin">{prompt}</p>
+          <p className="text-md">{prompt}</p>
         </div>
         <div className="flex justify-between">
           <Link href={`/?query=${tags.replace("#", "")}`}>

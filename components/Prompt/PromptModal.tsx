@@ -29,6 +29,7 @@ function PromptModal({
   const { data: session } = useSession();
 
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -62,6 +63,7 @@ function PromptModal({
         userId: session?.user?.id,
       });
     }
+    reset()
     response.ok && closeModal()
     await revalidatePage()
   };
