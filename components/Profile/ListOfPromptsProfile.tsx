@@ -8,9 +8,7 @@ async function ListOfPromptsProfile({ userId }:{ userId:string }) {
 
   return (
     <Suspense fallback={<PromptsSkeleton cards={3} />}>
-      {
         <ListOfPrompts prompts={prompts} />
-      }
     </Suspense>
   );
 }

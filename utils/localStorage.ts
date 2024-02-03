@@ -1,8 +1,8 @@
 import { IPrompt } from "@/types/prompt.types";
 
 interface FavoritePrompts {
-    userId: string;
-    favoritePrompts: IPrompt[];
+  userId: string;
+  favoritePrompts: IPrompt[];
 }
 
 const getNewUsersAndUserFinded = (userId: string) => {
@@ -19,7 +19,7 @@ const getNewUsersAndUserFinded = (userId: string) => {
 };
 
 function addPromptToLocalStorage(prompt: IPrompt, userId: string) {
-  const { newUsers, userFinded } = getNewUsersAndUserFinded(userId)
+  const { newUsers, userFinded } = getNewUsersAndUserFinded(userId);
 
   let newUser = {};
 
@@ -42,18 +42,19 @@ function addPromptToLocalStorage(prompt: IPrompt, userId: string) {
 }
 
 function removePromptToLocalStorage(promptId: string, userId: string) {
-  const { newUsers, userFinded } = getNewUsersAndUserFinded(userId)
+  const { newUsers, userFinded } = getNewUsersAndUserFinded(userId);
+  if (userFinded) {
+    const favoritePromptsDeleted = userFinded?.favoritePrompts.filter(
+      (promptMap) => promptMap._id !== promptId
+    );
 
-  const favoritePromptsDeleted = userFinded?.favoritePrompts.filter(
-    (promptMap) => promptMap._id !== promptId
-  );
+    if (userFinded) userFinded.favoritePrompts = favoritePromptsDeleted || [];
 
-  if (userFinded) userFinded.favoritePrompts = favoritePromptsDeleted || [];
-
-  localStorage.setItem(
-    "favoritePrompts",
-    JSON.stringify([...newUsers, userFinded])
-  );
+    localStorage.setItem(
+      "favoritePrompts",
+      JSON.stringify([...newUsers, userFinded])
+    );
+  }
 }
 
 function getLikedPrompts(userId: string): IPrompt[] {
