@@ -9,7 +9,7 @@ function ListOfPrompts({
   prompts: IPrompt[];
 }) {
   return (
-    <section className="space-y-4 py-5 sm:columns-2 xl:columns-3">
+    <section className="absolute top-0 space-y-4 py-5 sm:columns-2 xl:columns-3">
       {prompts?.map((promptMap) => {
         const { _id, creator, prompt, tags, title } = promptMap;
         return (
