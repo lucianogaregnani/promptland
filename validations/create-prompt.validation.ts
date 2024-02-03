@@ -8,8 +8,8 @@ const CreatePromptSchema = z.object({
     }),
     prompt: z.string().min(10, {
         message: "The prompt must contain at least 10 character"
-    }).max(200, {
-        message: "The prompt must be less than 200 characters"
+    }).max(600, {
+        message: "The prompt must be less than 600 characters"
     }), 
     tags: z.string().max(25, {
         message: "The tags must be less than 25 characters"

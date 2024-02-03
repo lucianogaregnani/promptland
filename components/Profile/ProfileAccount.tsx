@@ -30,7 +30,7 @@ async function ProfileAccount({
       </header>
       <main>
         <Buttons />
-        <section className="relative pb-2">
+        <section className="relative pb-2 flex justify-center">
           {section === "prompts" ? <ListOfPromptsProfile userId={userId} /> : <ListOfFavoritePrompts userId={userId} />}
         </section>
       </main>

@@ -14,7 +14,9 @@ function ListOfFavoritePrompts({ userId }:{ userId:string }) {
     }, [])
 
     return (
-        <ListOfPrompts prompts={prompts}/>
+        prompts.length ?
+        <ListOfPrompts prompts={prompts}/> :
+        <p className="text-2xl mt-4 font-medium">You dont have favorite prompts</p>
     );
 }
 
