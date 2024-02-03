@@ -3,6 +3,7 @@
 
 import { revalidatePage } from "@/actions/revalidatePage";
 import deletePrompt from "@/services/deletePrompt.service";
+import { removePromptToLocalStorage } from "@/utils/localStorage";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -22,6 +23,7 @@ function ButtonDelete({
     setIsLoading(true);
     await deletePrompt(promptId);
     await revalidatePage()
+    removePromptToLocalStorage(promptId, userId)
     setIsLoading(false);
   };
 

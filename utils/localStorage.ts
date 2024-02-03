@@ -1,6 +1,5 @@
 import { IPrompt } from "@/types/prompt.types";
 
-
 interface FavoritePrompts {
     userId: string;
     favoritePrompts: IPrompt[];
@@ -42,11 +41,11 @@ function addPromptToLocalStorage(prompt: IPrompt, userId: string) {
   );
 }
 
-function removePromptToLocalStorage(prompt: IPrompt, userId: string) {
+function removePromptToLocalStorage(promptId: string, userId: string) {
   const { newUsers, userFinded } = getNewUsersAndUserFinded(userId)
 
   const favoritePromptsDeleted = userFinded?.favoritePrompts.filter(
-    (promptMap) => promptMap._id !== prompt._id
+    (promptMap) => promptMap._id !== promptId
   );
 
   if (userFinded) userFinded.favoritePrompts = favoritePromptsDeleted || [];

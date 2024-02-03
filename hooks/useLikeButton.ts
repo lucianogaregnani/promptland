@@ -26,7 +26,7 @@ function useLikeButton(prompt: IPrompt, userId: string) {
       addPromptToLocalStorage(prompt, userId);
       setIsLikedButton(true);
     } else {
-      removePromptToLocalStorage(prompt, userId);
+      removePromptToLocalStorage(prompt._id, userId);
       setIsLikedButton(false);
     }
   };
