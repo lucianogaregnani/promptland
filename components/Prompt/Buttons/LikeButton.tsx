@@ -16,7 +16,7 @@ function LikeButton({ prompt }: { prompt: IPrompt }) {
         onClick={addLikedPrompt}
         className={`text-2xl ${
           isLikedButton ? "text-red-500" : "text-slate-300"
-        } mr-[0.3rem]`}
+        }`}
       >
         <FaHeart />
       </button>
