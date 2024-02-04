@@ -1,12 +1,11 @@
 import ListOfPrompts from "../Prompt/ListOfPrompts";
 import PromptsSkeleton from "@/Skeletons/PromptsSkeleton";
-import getPrompts from "@/services/getPrompts.service";
 import { Suspense } from "react";
 import { filterPrompts } from "@/utils/filterPrompt";
-import getPromptsByUserId from "@/services/getPromptsByUserId.service";
+import getPrompts from "@/services/getPrompts.service";
 
 async function ListOfPromptsHome({ query }: { query: string }) {
-  const prompts = await getPromptsByUserId();
+  const prompts = await getPrompts();
 
   const filteredPrompts = query ? filterPrompts(prompts, query) : prompts;
 
