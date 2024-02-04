@@ -8,7 +8,6 @@ export const GET = async (
     try {
         await connectToDB()
         let promptFinded
-        console.log({id})
         if(id !== "-1") {
             promptFinded = await Prompt.find({ creator:id }).populate("creator")
         } else {
@@ -17,6 +16,7 @@ export const GET = async (
 
         return new Response(JSON.stringify(promptFinded), { status:200 })
     } catch (error:any) {
+        console.log(error)
         return new Response(JSON.stringify({error:error.message}), { status:500 })
     }
 

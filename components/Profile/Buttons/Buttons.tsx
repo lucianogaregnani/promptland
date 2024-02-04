@@ -36,7 +36,7 @@ function Buttons() {
           onClick={changeTypeButton}
           type="likedPrompts"
         >
-          Liked prompts
+          Favorite Prompts
         </ProfileButton>
       )}
     </div>

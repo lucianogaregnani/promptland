@@ -31,12 +31,10 @@ const authOptions = {
             username: params.user?.name?.toLocaleLowerCase().replace(" ", ""),
             image: params.user?.image,
           });
-          console.log(newUser)
         }
 
         return true;
       } catch (error: any) {
-        console.log({error: error.message});
         return false;
       }
     },
