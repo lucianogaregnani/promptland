@@ -22,7 +22,7 @@ function ButtonDelete({
   const handleClick = async () => {
     setIsLoading(true);
     await deletePrompt(promptId);
-    await revalidatePage()
+    await revalidatePage('prompts')
     removePromptToLocalStorage(promptId, userId)
     setIsLoading(false);
   };

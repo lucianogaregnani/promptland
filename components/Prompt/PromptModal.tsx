@@ -65,7 +65,7 @@ function PromptModal({
     }
     reset()
     response.ok && closeModal()
-    await revalidatePage()
+    await revalidatePage('prompts')
   };
 
   return (

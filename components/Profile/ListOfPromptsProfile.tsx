@@ -1,10 +1,10 @@
 import ListOfPrompts from "../Prompt/ListOfPrompts";
 import { Suspense } from "react";
 import PromptsSkeleton from "@/Skeletons/PromptsSkeleton";
-import getPromptsByUserId from "@/services/getPromptsByUserId.service";
+import getPrompts from "@/services/getPrompts.service";
 
 async function ListOfPromptsProfile({ userId }:{ userId:string }) {
-  const prompts = await getPromptsByUserId(userId) 
+  const prompts = await getPrompts(userId) 
 
   return (
     <Suspense fallback={<PromptsSkeleton cards={3} />}>
