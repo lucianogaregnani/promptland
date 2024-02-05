@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={`text-slate-700 ${inter.className}`}>
         <GoogleProvider>
           <Nav />
-          <main className="">{children}</main>
+          <main>{children}</main>
         </GoogleProvider>
       </body>
     </html>

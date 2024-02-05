@@ -1,4 +1,5 @@
 import mongoose, { Schema, models } from "mongoose";
+import User from "./User.model";
 
 const PromptModel = new Schema({
   title: {
@@ -18,7 +19,7 @@ const PromptModel = new Schema({
   creator: {
     type: Schema.Types.ObjectId,
     require: [true, "The creator is required"],
-    ref: "User",
+    ref: User,
   },
 });
 
